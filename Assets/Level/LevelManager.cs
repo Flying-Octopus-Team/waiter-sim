@@ -12,6 +12,8 @@ namespace Level
         public float routeLenghtIncrease = 100f;
 
         public DishesRandomizer dishesRandomizer;
+
+        public Transform screenBreak;
         
         private void Start()
         {
@@ -40,6 +42,7 @@ namespace Level
         public void GameOver()
         {
             route.routeRunning = false;
+            screenBreak.gameObject.SetActive(true);
         }
 
         private RouteDirection NextRouteDirection()
