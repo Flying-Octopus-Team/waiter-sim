@@ -50,12 +50,13 @@ MonoBehaviour:
   losingBalanceBase: 1.04
   losingBalanceMultiplier: 10
   losingBalanceMinSpeed: 20
-  balanceControlSpeed: 60
+  balanceControlSpeed: 400
   randomDebalanceSpeed: 60
   randomDebalanceMinBreak: 2
   randomDebalanceMaxBreak: 6
   scoreChecker: {fileID: 460652729388650541}
   levelManager: {fileID: 0}
+  currentControl: 0
 --- !u!114 &460652729388650541
 MonoBehaviour:
   m_ObjectHideFlags: 0
