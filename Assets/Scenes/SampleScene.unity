@@ -209,7 +209,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -853,6 +853,14 @@ PrefabInstance:
     - target: {fileID: 3375572170645739068, guid: eccd6f4dd6d26a847a961cc65dfde59b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5324823374364680112, guid: eccd6f4dd6d26a847a961cc65dfde59b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5324823374364680112, guid: eccd6f4dd6d26a847a961cc65dfde59b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 600
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eccd6f4dd6d26a847a961cc65dfde59b, type: 3}

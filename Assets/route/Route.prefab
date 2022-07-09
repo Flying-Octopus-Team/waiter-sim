@@ -46,8 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   routeRunning: 0
-  mainElementStartingSpeed: 0.005
-  mainElementTargetScale: 2
   mainRouteElement: {fileID: 5324823374364680113}
 --- !u!1001 &3375572170615053602
 PrefabInstance:
@@ -66,15 +64,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7439352456078705298, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.01
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7439352456078705298, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.01
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7439352456078705298, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.01
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7439352456078705298, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -82,11 +80,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7439352456078705298, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7439352456078705298, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7439352456078705298, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -118,7 +116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7439352456078705298, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7439352456078705299, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
       propertyPath: baseSpeed
@@ -127,6 +125,22 @@ PrefabInstance:
     - target: {fileID: 7439352456078705299, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
       propertyPath: scaleVelocity
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7439352456419719213, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7439352456419719213, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7439352456419719213, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7439352456419719213, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
