@@ -46,7 +46,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   routeRunning: 0
+  routeDirection: 1
+  routeLength: 200
+  movementSpeed: 50
+  finishLineZ: 15
   mainRouteElement: {fileID: 5324823374364680113}
+  progressSlider: {fileID: 0}
+  topDecorationsStep: 73
+  topDecorationPrefabs:
+  - {fileID: 7439352456078705299, guid: 68259736185167f41a2dec3114478786, type: 3}
+  - {fileID: 7439352456078705299, guid: 534e82b4bfe0c5c46a0fda4ebb6ef504, type: 3}
+  topDecorations: []
+  sideDecorationsStep: 59
+  sideDecorationPrefabs: []
+  sideDecorations: []
 --- !u!1001 &3375572170615053602
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56,7 +69,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7439352456078705297, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
       propertyPath: m_Name
-      value: RouteElement
+      value: MainRouteElement
       objectReference: {fileID: 0}
     - target: {fileID: 7439352456078705298, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
       propertyPath: m_RootOrder
@@ -80,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7439352456078705298, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 7439352456078705298, guid: 83593f0f07b8abc4c803e477f7cf50e0, type: 3}
       propertyPath: m_LocalPosition.z

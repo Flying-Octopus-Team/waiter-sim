@@ -10,7 +10,6 @@ namespace Level
         public Route route;
         public float routeLenghtIncrease = 100f;
 
-
         private void Start()
         {
             route.OnRouteFinished = RunNextRoute;
@@ -20,7 +19,7 @@ namespace Level
         public void RunNextRoute()
         {
             route.routeDirection = NextRouteDirection();
-            route.routeLength = NextRouteLength();
+            NextRouteLength();
             routeCount++;
             route.StartRoute();
         }
@@ -35,14 +34,12 @@ namespace Level
             return route.routeDirection == RouteDirection.FROM_TABLE ? RouteDirection.TO_TABLE : RouteDirection.FROM_TABLE;
         }
 
-        private float NextRouteLength()
+        private void NextRouteLength()
         {
             if (route.routeDirection == RouteDirection.TO_TABLE)
             {
-                return route.routeLength;
+                route.IncreaseRouteLength(routeLenghtIncrease);
             }
-
-            return route.routeLength + routeLenghtIncrease;
         }
     }
 }
