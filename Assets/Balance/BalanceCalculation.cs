@@ -33,6 +33,7 @@ public class BalanceCalculation : MonoBehaviour
     public float currentControl;
     private bool isGameEnded = false;
 
+    private float lockControlAtBegin = 1.0f;
     void Start()
     {
         StartCoroutine(nameof(UpdateBalanceValue));
@@ -45,7 +46,14 @@ public class BalanceCalculation : MonoBehaviour
     {
         if (IsPlayingCondition())
         {
-            MouseControls();
+            if (lockControlAtBegin <= 0)
+            {
+                MouseControls();
+            }
+            else
+            {
+                lockControlAtBegin -= Time.deltaTime;
+            }
         }
         else
         {
