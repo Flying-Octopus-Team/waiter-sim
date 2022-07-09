@@ -29,6 +29,10 @@ namespace Routes
         [SerializeField] private List<RouteElement> sideDecorationPrefabs;
         [SerializeField] private List<RouteElement> sideDecorations = new();
 
+        [SerializeField] private List<RouteElement> additionalElements = new();
+        [SerializeField] private List<SpriteRenderer> scrollableYSprites = new();
+        [SerializeField] private List<SpriteRenderer> scrollableXSprites = new();
+
         private Vector3 _movementDirection = Vector3.back;
         private List<RouteElement> _elements;
         private float _progress = 0f;
@@ -43,7 +47,7 @@ namespace Routes
         {
             for (int i = startingLine; i < routeLength; i += sideDecorationsStep)
             {
-                var prefab = sideDecorationPrefabs[Random.Range(0, topDecorationPrefabs.Count)];
+                var prefab = sideDecorationPrefabs[Random.Range(0, sideDecorationPrefabs.Count)];
                 var sideDecoration = Instantiate(prefab, transform);
                 var position = sideDecoration.transform.position;
                 position.z = i;
@@ -65,7 +69,6 @@ namespace Routes
             }
         }
 
-        //todo maybe move camera instead of everything
         public void StartRoute()
         {
             routeRunning = true;
@@ -95,6 +98,18 @@ namespace Routes
             routeLength += increaseValue;
             GenerateTopDecorations((int)topDecorations[^1].transform.position.z + topDecorationsStep);
             GenerateSideDecorations((int)sideDecorations[^1].transform.position.z + topDecorationsStep);
+            scrollableYSprites.ForEach(spr =>
+            {
+                var size = spr.size;
+                size.y += increaseValue * 2;
+                spr.size = size;
+            });
+            scrollableXSprites.ForEach(spr =>
+            {
+                var size = spr.size;
+                size.x += increaseValue * 2;
+                spr.size = size;
+            });
         }
 
         private float CalculateRouteProgress()
@@ -110,6 +125,7 @@ namespace Routes
                 mainRouteElement.Move(_movementDirection, movementSpeed);
                 topDecorations.ForEach(deco => deco.Move(_movementDirection, movementSpeed));
                 sideDecorations.ForEach(deco => deco.Move(_movementDirection, movementSpeed));
+                additionalElements.ForEach(deco => deco.Move(_movementDirection, movementSpeed));
                 Progress = CalculateRouteProgress();
                 if (IsRouteFinished())
                 {
