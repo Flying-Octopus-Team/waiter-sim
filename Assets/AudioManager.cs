@@ -47,10 +47,11 @@ public class AudioManager : MonoBehaviour
 
 	private IEnumerator StartRandomSFX(){
 		while (isPlaying){
-			int interval = Random.Range(intervalMin, intervalMax);
+			float interval = Random.Range(intervalMin, intervalMax);
 			int idx = Random.Range(0, sfxClips.Length);
 			sfxSource.clip = sfxClips[idx];
 			sfxSource.Play(1);
+			interval += sfxSource.clip.length;
 			yield return new WaitForSeconds(interval);	
 		}
 	}
