@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Routes;
+using System.Collections;
 
 namespace Level
 {
@@ -10,6 +11,7 @@ namespace Level
         public Route route;
         public float routeLenghtIncrease = 100f;
 
+        public DishesRandomizer dishesRandomizer;
 
         private void Start()
         {
@@ -20,9 +22,18 @@ namespace Level
         public void RunNextRoute()
         {
             route.routeDirection = NextRouteDirection();
+            if (route.routeDirection == RouteDirection.FROM_TABLE)
+            {
+                dishesRandomizer.PutDownDishes();
+            }
+            else 
+            {
+                dishesRandomizer.RandomizeDishes();
+            }
             route.routeLength = NextRouteLength();
             routeCount++;
             route.StartRoute();
+            StartCoroutine(nameof(WaitBetweenStates));
         }
 
         public void GameOver()
@@ -43,6 +54,14 @@ namespace Level
             }
 
             return route.routeLength + routeLenghtIncrease;
+        }
+
+        private IEnumerator WaitBetweenStates()
+        {
+            route.routeRunning = false;
+            yield return new WaitForSeconds(1f);
+            route.routeRunning = true;
+            yield return null;
         }
     }
 }
