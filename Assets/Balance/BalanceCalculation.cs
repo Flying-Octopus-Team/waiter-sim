@@ -30,13 +30,14 @@ public class BalanceCalculation : MonoBehaviour
     [SerializeField] private NewScoreChecker scoreChecker;
     [SerializeField] private LevelManager levelManager;
 
+    public float currentControl;
     private bool isGameEnded = false;
 
     void Start()
     {
         StartCoroutine(nameof(UpdateBalanceValue));
         StartCoroutine(nameof(SetRandomBalanceInterrupt));
-        StartCoroutine(nameof(ShowCurrentBalance));
+        //StartCoroutine(nameof(ShowCurrentBalance));
         StartCoroutine(nameof(CountScore));
     }
 
@@ -44,14 +45,7 @@ public class BalanceCalculation : MonoBehaviour
     {
         if (IsPlayingCondition())
         {
-            if (Input.GetKey("a"))
-            {
-                BalanceValue -= balanceControlSpeed * Time.deltaTime;
-            }
-            else if (Input.GetKey("d"))
-            {
-                BalanceValue += balanceControlSpeed * Time.deltaTime;
-            }
+            MouseControls();
         }
         else
         {
@@ -64,6 +58,18 @@ public class BalanceCalculation : MonoBehaviour
         }
 
         BalanceValue = Mathf.Clamp(BalanceValue, MIN_BALANCE_ALLOWED, MAX_BALANCE_ALLOWED);
+    }    
+    
+    private void MouseControls()
+    {
+        var mousePos = Input.mousePosition;
+        mousePos.x -= Screen.width / 2;
+        mousePos.y -= Screen.height / 2;
+
+        float mouseXNormalized = mousePos.x / Screen.width;
+        currentControl = mouseXNormalized * balanceControlSpeed * Time.deltaTime;
+
+        BalanceValue += currentControl;
     }
 
     private IEnumerator UpdateBalanceValue()
