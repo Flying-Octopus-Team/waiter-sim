@@ -14,6 +14,7 @@ namespace Level
         private void Start()
         {
             route.OnRouteFinished = RunNextRoute;
+            RunNextRoute();
         }
 
         public void RunNextRoute()

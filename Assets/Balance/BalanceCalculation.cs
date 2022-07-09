@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Level;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,8 +22,13 @@ public class BalanceCalculation : MonoBehaviour
     [SerializeField] private Slider balanceSlider;
     [SerializeField] private float losingBalanceBase = 1.02f;
     [SerializeField] private float losingBalanceMultiplier = 2f;
+    [SerializeField] private float losingBalanceMinSpeed = 20f;
     [SerializeField] private float balanceControlSpeed = 5f;
+    [SerializeField] private float randomDebalanceSpeed = 20f;
+    [SerializeField] private float randomDebalanceMinBreak = 2f;
+    [SerializeField] private float randomDebalanceMaxBreak = 6f;
     [SerializeField] private NewScoreChecker scoreChecker;
+    [SerializeField] private LevelManager levelManager;
 
     private bool isGameEnded = false;
 
@@ -31,6 +37,7 @@ public class BalanceCalculation : MonoBehaviour
         StartCoroutine(nameof(UpdateBalanceValue));
         StartCoroutine(nameof(SetRandomBalanceInterrupt));
         StartCoroutine(nameof(ShowCurrentBalance));
+        StartCoroutine(nameof(CountScore));
     }
 
     void Update() 
@@ -50,6 +57,7 @@ public class BalanceCalculation : MonoBehaviour
         {
             if (!isGameEnded)
             {
+                levelManager.GameOver();
                 isGameEnded = true;
                 scoreChecker.OnGameEnded();
             }
@@ -62,36 +70,53 @@ public class BalanceCalculation : MonoBehaviour
     {
         while(IsPlayingCondition())
         {
-            int sign = BalanceValue > 0 ? 1 : -1; 
-            BalanceValue += 
-                sign * 
-                (Mathf.Pow(losingBalanceBase, Mathf.Abs(BalanceValue)) - 1) * 
-                losingBalanceMultiplier * 
-                Time.deltaTime;
+            BalanceValue += GetImbalanceFactor();
             yield return null;
         }
 
         yield return null;
     }
+
+    private float GetImbalanceFactor()
+    {
+        int sign = BalanceValue > 0 ? 1 : -1; 
+        float nextimbalanceVal = sign * 
+               (Mathf.Pow(losingBalanceBase, Mathf.Abs(BalanceValue)) - 1) * 
+               losingBalanceMultiplier;
+
+        if (Mathf.Abs(nextimbalanceVal) < losingBalanceMinSpeed)
+        {
+            return sign * losingBalanceMinSpeed * 
+                Time.deltaTime;
+        }
+        
+        return Mathf.Clamp(
+            nextimbalanceVal,
+            - 0.8f * balanceControlSpeed,
+             0.8f * balanceControlSpeed) * 
+            Time.deltaTime;
+    }
     private IEnumerator SetRandomBalanceInterrupt()
     {
         while (IsPlayingCondition())
         {
-            yield return new WaitForSeconds(Random.Range(4,8));
+            yield return new WaitForSeconds(
+                Random.Range(randomDebalanceMinBreak, randomDebalanceMaxBreak));
 
-            float elapsedTime = 0;
+            float remainingDebalance = 0;
             float debalancingTime = Random.Range(1f, 2f);
 
             float startBalanceValue = BalanceValue;
-            float targetBalance = Random.Range(-70f, 70f);
+            float targetBalance = Random.Range(20f, 50f);
 
-            while (elapsedTime < debalancingTime &&
+            int sign = BalanceValue > 0 ? 1 : -1;
+
+            while (remainingDebalance < targetBalance &&
                 IsPlayingCondition())
             {
-                elapsedTime += Time.deltaTime;
+                remainingDebalance += randomDebalanceSpeed * Time.deltaTime;
 
-                BalanceValue = Mathf.Lerp(
-                    startBalanceValue, targetBalance, elapsedTime / debalancingTime);
+                BalanceValue += sign * randomDebalanceSpeed * Time.deltaTime;
 
                 yield return null;
             }
@@ -106,6 +131,16 @@ public class BalanceCalculation : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         Debug.Log(BalanceValue.ToString());
+        yield return null;
+    }
+
+    private IEnumerator CountScore()
+    {
+        while (IsPlayingCondition())
+        {
+            scoreChecker.Score++;
+            yield return new WaitForSeconds(1f);
+        }
         yield return null;
     }
 

@@ -7,10 +7,20 @@ using UnityEngine.SceneManagement;
 public class NewScoreChecker : MonoBehaviour
 {
 
-    public int score = 0;
+    private int _score = 0;
+    public int Score
+    {
+        get => _score;
+        set
+        {
+            _score = value;
+            scoreTxt.text = _score.ToString();
+        }
+    }
     public string userName;
     public GameObject askUserPanel;
     public TMP_InputField inputField;
+    public TMP_Text scoreTxt;
     public DataManager dataManager;
 
     public void OnInputChanged()
@@ -20,7 +30,7 @@ public class NewScoreChecker : MonoBehaviour
 
     public void OnGameEnded()
     {
-        if (dataManager.IsNewHighScore(score))
+        if (dataManager.IsNewHighScore(Score))
         {
             askUserPanel.SetActive(true);
         }
@@ -33,7 +43,7 @@ public class NewScoreChecker : MonoBehaviour
     public void OnSubmitScore()
     {
         askUserPanel.SetActive(false);
-        dataManager.AddNewScore(userName, score);
+        dataManager.AddNewScore(userName, Score);
         dataManager.ShowHighScores();
     }
 
@@ -42,4 +52,5 @@ public class NewScoreChecker : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene(); 
         SceneManager.LoadScene(scene.name);
     }
+
 }
