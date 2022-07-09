@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Route.Element;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Route
 {
@@ -15,16 +16,50 @@ namespace Route
         public float movementSpeed = 50f;
 
         public RouteElement mainRouteElement;
+        public Slider progressSlider;
 
         private Vector3 _movementDirection = Vector3.back;
         private List<RouteElement> _elements;
 
         //todo maybe move camera instead of everything
+        public void StartRoute()
+        {
+            routeRunning = true;
+
+            if (RouteDirection.TO_TABLE == routeDirection)
+            {
+                StartRoute(Vector3.back, routeLength);
+            }
+            else
+            {
+                StartRoute(Vector3.forward, finishLineZ);
+            }
+        }
+
+        public float Progress
+        {
+            get => _progress;
+            set
+            {
+                _progress = value;
+                progressSlider.value = _progress;
+            }
+        }
+
+        private float _progress = 0f;
+
+        private float CalculateRouteProgress()
+        {
+            var normalizedDiff = (routeLength - mainRouteElement.transform.position.z) / (routeLength - finishLineZ);
+            return Mathf.Clamp(normalizedDiff, 0, 1) * 100;
+        }
+
         private void Update()
         {
             if (routeRunning)
             {
                 mainRouteElement.Move(_movementDirection, movementSpeed);
+                Progress = CalculateRouteProgress();
                 if (IsRouteFinished())
                 {
                     routeRunning = false;
@@ -40,20 +75,6 @@ namespace Route
             }
 
             return mainRouteElement.transform.position.z >= routeLength;
-        }
-
-        public void StartRoute()
-        {
-            routeRunning = true;
-
-            if (RouteDirection.TO_TABLE == routeDirection)
-            {
-                StartRoute(Vector3.back, routeLength);
-            }
-            else
-            {
-                StartRoute(Vector3.forward, finishLineZ);
-            }
         }
 
         private void StartRoute(Vector3 routeMovementDirection, float mainRouteElementZPosition)
