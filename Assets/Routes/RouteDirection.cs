@@ -1,4 +1,4 @@
-﻿namespace Route
+﻿namespace Routes
 {
     public enum RouteDirection
     {

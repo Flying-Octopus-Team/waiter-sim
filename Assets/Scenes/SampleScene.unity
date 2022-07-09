@@ -250,8 +250,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 537873459}
+  - component: {fileID: 537873460}
   m_Layer: 0
-  m_Name: RouteManager
+  m_Name: LevelManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -270,8 +271,23 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &537873460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537873458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e821c6bdc2164ef5bbf6eba2d1b8ddb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  routeCount: -1
+  route: {fileID: 912828221}
+  routeLenghtIncrease: 100
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,10 +482,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 912828221}
-        m_TargetAssemblyTypeName: route.RouteManager, Assembly-CSharp
-        m_MethodName: StartRoute
+      - m_Target: {fileID: 537873460}
+        m_TargetAssemblyTypeName: Level.LevelManager, Assembly-CSharp
+        m_MethodName: RunNextRoute
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 666490008}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
+        m_MethodName: set_interactable
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -622,7 +650,7 @@ RectTransform:
   - {fileID: 666490007}
   - {fileID: 1248789920}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -829,7 +857,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1248789919
 GameObject:
@@ -1123,7 +1151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3375572170645739068, guid: eccd6f4dd6d26a847a961cc65dfde59b, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3375572170645739068, guid: eccd6f4dd6d26a847a961cc65dfde59b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1166,16 +1194,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3375572170645739069, guid: eccd6f4dd6d26a847a961cc65dfde59b, type: 3}
+      propertyPath: routeLength
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3375572170645739069, guid: eccd6f4dd6d26a847a961cc65dfde59b, type: 3}
       propertyPath: progressSlider
       value: 
       objectReference: {fileID: 1248789921}
+    - target: {fileID: 3375572170645739069, guid: eccd6f4dd6d26a847a961cc65dfde59b, type: 3}
+      propertyPath: routeDirection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5324823374364680112, guid: eccd6f4dd6d26a847a961cc65dfde59b, type: 3}
       propertyPath: m_LocalPosition.y
       value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 5324823374364680112, guid: eccd6f4dd6d26a847a961cc65dfde59b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 600
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eccd6f4dd6d26a847a961cc65dfde59b, type: 3}

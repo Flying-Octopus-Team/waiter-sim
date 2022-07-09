@@ -1,7 +1,7 @@
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
-namespace Route.Element
+namespace Routes.Element
 {
     public class RouteElement : MonoBehaviour
     {

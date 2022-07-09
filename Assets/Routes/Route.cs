@@ -1,25 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using Route.Element;
+using Routes.Element;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Route
+namespace Routes
 {
     public class Route : MonoBehaviour
     {
-        public RouteDirection routeDirection;
         public bool routeRunning;
-
+        public RouteDirection routeDirection;
         public float routeLength = 300;
-        public float finishLineZ = 10;
         public float movementSpeed = 50f;
 
-        public RouteElement mainRouteElement;
-        public Slider progressSlider;
+        public UnityAction OnRouteFinished;
+
+        [SerializeField] private float finishLineZ = 10;
+        [SerializeField] private RouteElement mainRouteElement;
+        [SerializeField] private Slider progressSlider;
 
         private Vector3 _movementDirection = Vector3.back;
         private List<RouteElement> _elements;
+        private float _progress = 0f;
 
         //todo maybe move camera instead of everything
         public void StartRoute()
@@ -39,14 +42,12 @@ namespace Route
         public float Progress
         {
             get => _progress;
-            set
+            private set
             {
                 _progress = value;
                 progressSlider.value = _progress;
             }
         }
-
-        private float _progress = 0f;
 
         private float CalculateRouteProgress()
         {
@@ -63,6 +64,7 @@ namespace Route
                 if (IsRouteFinished())
                 {
                     routeRunning = false;
+                    OnRouteFinished.Invoke();
                 }
             }
         }
