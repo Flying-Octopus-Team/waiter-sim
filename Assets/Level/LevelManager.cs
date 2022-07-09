@@ -12,7 +12,7 @@ namespace Level
         public float routeLenghtIncrease = 100f;
 
         public DishesRandomizer dishesRandomizer;
-
+        
         private void Start()
         {
             route.OnRouteFinished = RunNextRoute;
@@ -22,6 +22,7 @@ namespace Level
         public void RunNextRoute()
         {
             route.routeDirection = NextRouteDirection();
+            
             if (route.routeDirection == RouteDirection.FROM_TABLE)
             {
                 dishesRandomizer.PutDownDishes();
@@ -30,7 +31,7 @@ namespace Level
             {
                 dishesRandomizer.RandomizeDishes();
             }
-            route.routeLength = NextRouteLength();
+            NextRouteLength();
             routeCount++;
             route.StartRoute();
             StartCoroutine(nameof(WaitBetweenStates));
@@ -46,14 +47,12 @@ namespace Level
             return route.routeDirection == RouteDirection.FROM_TABLE ? RouteDirection.TO_TABLE : RouteDirection.FROM_TABLE;
         }
 
-        private float NextRouteLength()
+        private void NextRouteLength()
         {
             if (route.routeDirection == RouteDirection.TO_TABLE)
             {
-                return route.routeLength;
+                route.IncreaseRouteLength(routeLenghtIncrease);
             }
-
-            return route.routeLength + routeLenghtIncrease;
         }
 
         private IEnumerator WaitBetweenStates()
