@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Route.Element;
 using UnityEngine;
 
-namespace route
+namespace Route
 {
     public class Route : MonoBehaviour
     {
@@ -14,7 +15,7 @@ namespace route
         public float movementSpeed = 50f;
 
         public RouteElement mainRouteElement;
-        
+
         private Vector3 _movementDirection = Vector3.back;
         private List<RouteElement> _elements;
 
