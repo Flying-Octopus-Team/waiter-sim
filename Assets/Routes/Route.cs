@@ -33,7 +33,7 @@ namespace Routes
         private List<RouteElement> _elements;
         private float _progress = 0f;
 
-        private void Start()
+        private void Awake()
         {
             GenerateTopDecorations((int)finishLineZ);
             GenerateSideDecorations((int)finishLineZ);
