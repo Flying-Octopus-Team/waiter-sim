@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 460652729388650547}
   - component: {fileID: 460652729388650546}
   - component: {fileID: 460652729388650541}
+  - component: {fileID: 2052677875}
   m_Layer: 0
   m_Name: BalanceManger
   m_TagString: Untagged
@@ -46,10 +47,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   balanceSlider: {fileID: 0}
-  losingBalanceBase: 1.02
-  losingBalanceMultiplier: 3
-  balanceControlSpeed: 20
+  losingBalanceBase: 1.04
+  losingBalanceMultiplier: 10
+  losingBalanceMinSpeed: 20
+  balanceControlSpeed: 60
+  randomDebalanceSpeed: 60
+  randomDebalanceMinBreak: 2
+  randomDebalanceMaxBreak: 6
   scoreChecker: {fileID: 460652729388650541}
+  levelManager: {fileID: 0}
 --- !u!114 &460652729388650541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,8 +68,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebbfb6726a7437d48b5ed49e2a4abddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
   userName: 
   askUserPanel: {fileID: 0}
   inputField: {fileID: 0}
+  scoreTxt: {fileID: 0}
   dataManager: {fileID: 0}
+--- !u!114 &2052677875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460652729388650544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d8c809b21c7fc458289a721a9d0069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAngleDifference: 45
+  balanceCalculation: {fileID: 460652729388650546}
+  spine: {fileID: 0}
