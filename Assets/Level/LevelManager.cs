@@ -24,6 +24,11 @@ namespace Level
             route.StartRoute();
         }
 
+        public void GameOver()
+        {
+            route.routeRunning = false;
+        }
+
         private RouteDirection NextRouteDirection()
         {
             return route.routeDirection == RouteDirection.FROM_TABLE ? RouteDirection.TO_TABLE : RouteDirection.FROM_TABLE;
