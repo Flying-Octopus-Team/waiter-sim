@@ -52,5 +52,9 @@ public class NewScoreChecker : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene(); 
         SceneManager.LoadScene(scene.name);
     }
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 
 }
