@@ -29,7 +29,8 @@ public class BalanceCalculation : MonoBehaviour
     [SerializeField] private float randomDebalanceMaxBreak = 6f;
     [SerializeField] private NewScoreChecker scoreChecker;
     [SerializeField] private LevelManager levelManager;
-
+    [SerializeField] private Texture2D leftCursor;
+    [SerializeField] private Texture2D rightCursor;
     public float currentControl;
     private bool isGameEnded = false;
 
@@ -76,6 +77,15 @@ public class BalanceCalculation : MonoBehaviour
 
         float mouseXNormalized = mousePos.x / Screen.width;
         currentControl = mouseXNormalized * balanceControlSpeed * Time.deltaTime;
+
+        if (currentControl > 0)
+        {
+            Cursor.SetCursor(rightCursor, Vector2.zero, CursorMode.Auto);
+        }
+        else
+        {
+            Cursor.SetCursor(leftCursor, Vector2.zero, CursorMode.Auto);
+        }
 
         BalanceValue += currentControl;
     }
