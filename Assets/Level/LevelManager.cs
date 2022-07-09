@@ -14,6 +14,8 @@ namespace Level
         public DishesRandomizer dishesRandomizer;
 
         public Transform screenBreak;
+
+        public static event Action GameOverEvent;
         
         private void Start()
         {
@@ -43,6 +45,10 @@ namespace Level
         {
             route.routeRunning = false;
             screenBreak.gameObject.SetActive(true);
+            if (GameOverEvent != null){
+                GameOverEvent.Invoke();
+                GameOverEvent = null;
+            }
         }
 
         private RouteDirection NextRouteDirection()
