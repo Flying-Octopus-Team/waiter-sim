@@ -22,6 +22,9 @@ public class BalanceCalculation : MonoBehaviour
     [SerializeField] private float losingBalanceBase = 1.02f;
     [SerializeField] private float losingBalanceMultiplier = 2f;
     [SerializeField] private float balanceControlSpeed = 5f;
+    [SerializeField] private NewScoreChecker scoreChecker;
+
+    private bool isGameEnded = false;
 
     void Start()
     {
@@ -41,6 +44,14 @@ public class BalanceCalculation : MonoBehaviour
             else if (Input.GetKey("d"))
             {
                 BalanceValue += balanceControlSpeed * Time.deltaTime;
+            }
+        }
+        else
+        {
+            if (!isGameEnded)
+            {
+                isGameEnded = true;
+                scoreChecker.OnGameEnded();
             }
         }
 
