@@ -82,7 +82,7 @@ public class BalanceCalculation : MonoBehaviour
 
         if (mouseXNormalized > 0)
         {
-            if (mouseXNormalized > 0.5f)
+            if (mouseXNormalized > 0.33f)
             {
                 Cursor.SetCursor(rightCursorRed, Vector2.zero, CursorMode.Auto);
             }
@@ -93,7 +93,7 @@ public class BalanceCalculation : MonoBehaviour
         }
         else
         {
-            if (mouseXNormalized < -0.5f)
+            if (mouseXNormalized < -0.33f)
             {
                 Cursor.SetCursor(leftCursorRed, Vector2.zero, CursorMode.Auto);
             }
