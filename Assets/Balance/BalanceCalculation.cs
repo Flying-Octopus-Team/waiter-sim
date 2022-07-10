@@ -31,6 +31,8 @@ public class BalanceCalculation : MonoBehaviour
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private Texture2D leftCursor;
     [SerializeField] private Texture2D rightCursor;
+    [SerializeField] private Texture2D leftCursorRed;
+    [SerializeField] private Texture2D rightCursorRed;
     public float currentControl;
     private bool isGameEnded = false;
 
@@ -75,16 +77,30 @@ public class BalanceCalculation : MonoBehaviour
         mousePos.x -= Screen.width / 2;
         mousePos.y -= Screen.height / 2;
 
-        float mouseXNormalized = mousePos.x / Screen.width;
+        float mouseXNormalized = mousePos.x / Screen.width * 2;
         currentControl = mouseXNormalized * balanceControlSpeed * Time.deltaTime;
 
-        if (currentControl > 0)
+        if (mouseXNormalized > 0)
         {
-            Cursor.SetCursor(rightCursor, Vector2.zero, CursorMode.Auto);
+            if (mouseXNormalized > 0.5f)
+            {
+                Cursor.SetCursor(rightCursorRed, Vector2.zero, CursorMode.Auto);
+            }
+            else
+            {
+                Cursor.SetCursor(rightCursor, Vector2.zero, CursorMode.Auto);
+            }
         }
         else
         {
-            Cursor.SetCursor(leftCursor, Vector2.zero, CursorMode.Auto);
+            if (mouseXNormalized < -0.5f)
+            {
+                Cursor.SetCursor(leftCursorRed, Vector2.zero, CursorMode.Auto);
+            }
+            else
+            {
+                Cursor.SetCursor(leftCursor, Vector2.zero, CursorMode.Auto);
+            }
         }
 
         BalanceValue += currentControl;
