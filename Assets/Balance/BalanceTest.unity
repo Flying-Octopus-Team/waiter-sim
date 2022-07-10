@@ -739,6 +739,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!212 &93486817 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6625930730425953994, guid: eccd6f4dd6d26a847a961cc65dfde59b, type: 3}
+  m_PrefabInstance: {fileID: 387190099}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &100066850 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3043051410317904437, guid: 9c6a8fb815805fc4db2d062dcdb23428, type: 3}
@@ -9050,7 +9055,7 @@ MonoBehaviour:
   - {fileID: 1657997740}
   - {fileID: 1602577200}
   - {fileID: 973037564}
-  targetTableDishes: {fileID: 0}
+  targetTableDishes: {fileID: 93486817}
 --- !u!43 &1861248258
 Mesh:
   m_ObjectHideFlags: 0
