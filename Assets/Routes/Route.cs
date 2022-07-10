@@ -33,6 +33,12 @@ namespace Routes
         [SerializeField] private List<SpriteRenderer> scrollableYSprites = new();
         [SerializeField] private List<SpriteRenderer> scrollableXSprites = new();
 
+        [Header("Scrollable Walls Group")]
+        [SerializeField] private Transform groupParent; 
+        [SerializeField] private Transform groupToSpawn; 
+        [SerializeField] private List<Transform> groups;
+        [SerializeField] private Transform endWall;
+
         private Vector3 _movementDirection = Vector3.back;
         private List<RouteElement> _elements;
         private float _progress = 0f;
@@ -53,6 +59,7 @@ namespace Routes
                 position.z = i;
                 sideDecoration.transform.position = position;
                 sideDecorations.Add(sideDecoration);
+                sideDecoration.TransitionIn();
             }
         }
 
@@ -66,6 +73,7 @@ namespace Routes
                 position.z = i;
                 topDecoration.transform.position = position;
                 topDecorations.Add(topDecoration);
+                topDecoration.TransitionIn();
             }
         }
 
@@ -98,18 +106,27 @@ namespace Routes
             routeLength += increaseValue;
             GenerateTopDecorations((int)topDecorations[^1].transform.position.z + topDecorationsStep);
             GenerateSideDecorations((int)sideDecorations[^1].transform.position.z + topDecorationsStep);
-            scrollableYSprites.ForEach(spr =>
-            {
-                var size = spr.size;
-                size.y += increaseValue * 2;
-                spr.size = size;
-            });
-            scrollableXSprites.ForEach(spr =>
-            {
-                var size = spr.size;
-                size.x += increaseValue * 2;
-                spr.size = size;
-            });
+
+            SpawnNewGroupIfNeeded();
+        }
+
+        private void SpawnNewGroupIfNeeded() {
+            int groupLenght = 500;
+            int count = groups.Count;
+            bool shouldSpawn = (500 + routeLength) / groupLenght > count;
+            if (shouldSpawn) {
+                
+                Vector3 spawnAt = new Vector3 (0, 14, 200 + (groupLenght * count));
+                Transform newGroup = Instantiate(groupToSpawn, spawnAt,  Quaternion.identity);
+                newGroup.parent = groupParent;
+                groups.Add(newGroup);
+
+                Vector3 currentPos = endWall.transform.position;
+                endWall.transform.position = new Vector3(
+                    currentPos.x, 
+                    currentPos.y, 
+                    currentPos.z + groupLenght);
+            }
         }
 
         private float CalculateRouteProgress()
@@ -122,6 +139,8 @@ namespace Routes
         {
             if (routeRunning)
             {
+                groupParent.transform.position += _movementDirection * (Time.deltaTime * movementSpeed);
+                
                 mainRouteElement.Move(_movementDirection, movementSpeed);
                 topDecorations.ForEach(deco => deco.Move(_movementDirection, movementSpeed));
                 sideDecorations.ForEach(deco => deco.Move(_movementDirection, movementSpeed));
