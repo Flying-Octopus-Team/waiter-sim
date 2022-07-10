@@ -9048,6 +9048,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 95e0e8505b5cb0341ab102bb4968b867, type: 3}
   - {fileID: 21300000, guid: dc67f833b1b609b4ba49c4520366b736, type: 3}
   - {fileID: 21300000, guid: d0ee2f4b57bb7e240b9671ee3d95fad5, type: 3}
+  - {fileID: 21300000, guid: 253d861e46bbc4743b57953f4c55f424, type: 3}
+  - {fileID: 21300000, guid: 1e87275afdbca8b41a7f8e7656bb0c07, type: 3}
+  - {fileID: 21300000, guid: 3edf1c77ae466b84b8cf23731a01ec5a, type: 3}
+  - {fileID: 21300000, guid: 51205e3a7c3e29149ae219fe219b8f52, type: 3}
+  - {fileID: 21300000, guid: a963fb76ec516a74c8e3ae4bfcd2e91d, type: 3}
+  - {fileID: 21300000, guid: 1c211c9defcabcf4e85ee3f218a23592, type: 3}
   dishesOnHands:
   - {fileID: 1679808712}
   - {fileID: 2122298874}
